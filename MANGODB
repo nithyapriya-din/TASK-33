@@ -1,0 +1,231 @@
+1.View all the documents in the users collection: 
+        Use the db.collection.find() method in the MongoDB Shell to query documents in a collection.
+
+2.. View all the documents with name and age fields in the users collection:
+     Using findOne() to get All Field Names in MongoDB
+To get all field names or names of all keys from the collection, use the findOne() along with the for loop. The findOne() returns only one document that meets the provided criteria.
+Using aggregate() method to get the names of keys
+As we know, the aggregate() method is used to perform complex queries on a collection. Aggregation refers to the procedure of going through several phases with a huge collection of documents to process them. So, we can use the $project stage to retrieve the field names. The $project sends the documents with the specified fields to the very next pipeline stage.
+
+# Using aggregate() method 
+db.student.aggregate([
+    { $project: { keys: { $objectToArray: "$$ROOT" } } },
+    { $group: { _id: "$keys.k" } }
+]).forEach(function(doc) { print(doc._id); });
+3. View all the documents with name and age fields in the users collection where age is greater than 30:
+  db.users.find({"age" : {"$gte" : 18, "$lte" : 30}})
+4.View all the documents with name and age fields in the users collection where age is greater than or equal to 30:
+
+db.inventory.insertMany( [
+  {
+     "item": "nuts", "quantity": 30,
+     "carrier": { "name": "Shipit", "fee": 3 }
+  },
+  {
+     "item": "bolts", "quantity": 50,
+     "carrier": { "name": "Shipit", "fee": 4 }
+  },
+  {
+     "item": "washers", "quantity": 10,
+     "carrier": { "name": "Shipit", "fee": 1 }
+  }
+] )
+
+Output:
+
+{
+ _id: ObjectId("61ba25cbfe687fce2f042414"),
+ item: 'nuts',
+ quantity: 30,
+ carrier: { name: 'Shipit', fee: 3 }
+},
+{
+ _id: ObjectId("61ba25cbfe687fce2f042415"),
+ item: 'bolts',
+ quantity: 50,
+ carrier: { name: 'Shipit', fee: 4 }
+}
+
+5.View all the documents with name and age fields in the users collection where age is less than 30:
+The find() returns all the documents from a collection if no parameter is passed. The following executes the db.employees.find() in mongosh shell:
+humanResourceDB> db.employees.find()
+[
+    { 
+        _id:1,
+        firstName: "John",
+        lastName: "King",
+        email: "john.king@abc.com",
+        salary: 5000,
+        skills: [ "Angular", "React", "MongoDB" ],
+        department: { "name":"IT" }
+    },
+    { 
+        _id:2,
+        firstName: "Sachin",
+        lastName: "T",
+        email: "sachin.t@abc.com",
+        salary: 8000,
+        skills: [ "Accounting", "Tax" ],
+        department: { "name":"Finance" }
+    },
+    { 
+        _id:3,
+        firstName: "James",
+        lastName: "Bond",
+        email: "jamesb@abc.com",
+        salary: 7500,
+        skills: [ "Sales", "Marketing" ],
+        department: { "name":"Marketing" }
+    },
+    { 
+        _id:4,
+        firstName: "Steve",
+        lastName: "J",
+        email: "steve.j@abc.com",
+        salary: 7000
+
+    },
+    { 
+        _id:5,
+        firstName: "Kapil",
+        lastName: "D",
+        email: "kapil.d@abc.com",
+        salary: 4500,
+        skills: [ "Accounting", "Tax" ],
+        department: { "name":"Finance" }
+
+    },
+    { 
+        _id:6,
+        firstName: "Amitabh",
+        lastName: "B",
+        email: "amitabh.b@abc.com",
+        salary: 7000
+    }
+]
+
+Executing db.collection.find() in mongosh shell automatically iterates the cursor to display up to the first 20 documents. Type it to continue iteration.
+You can specify the criteria as { field: "value", field:"value",..} on which you want to find a document. For example, the following returns all the documents where salary is 7000.
+6.View all the documents with name and age fields in the users collection where age is less than or equal to 30:
+(db.users.drop())
+db.users.insertMany(
+  [
+     {
+       _id: 1,
+       name: "sue",
+       age: 19,
+       type: 1,
+       status: "P",
+       favorites: { artist: "Picasso", food: "pizza" },
+       finished: [ 17, 3 ],
+       badges: [ "blue", "black" ],
+       points: [
+          { points: 85, bonus: 20 },
+          { points: 85, bonus: 10 }
+       ]
+     },
+     {
+       _id: 2,
+       name: "bob",
+       age: 42,
+       type: 1,
+       status: "A",
+       favorites: { artist: "Miro", food: "meringue" },
+       finished: [ 11, 25 ],
+       badges: [ "green" ],
+       points: [
+          { points: 85, bonus: 20 },
+          { points: 64, bonus: 12 }
+       ]
+     },
+     {
+       _id: 3,
+       name: "ahn",
+       age: 22,
+       type: 2,
+       status: "A",
+       favorites: { artist: "Cassatt", food: "cake" },
+       finished: [ 6 ],
+       badges: [ "blue", "red" ],
+       points: [
+          { points: 81, bonus: 8 },
+          { points: 55, bonus: 20 }
+       ]
+     },
+     {
+       _id: 4,
+       name: "xi",
+       age: 34,
+       type: 2,
+       status: "D",
+       favorites: { artist: "Chagall", food: "chocolate" },
+       finished: [ 5, 11 ],
+       badges: [ "red", "black" ],
+       points: [
+          { points: 53, bonus: 15 },
+          { points: 51, bonus: 15 }
+       ]
+     },
+     {
+       _id: 5,
+       name: "xyz",
+       age: 23,
+       type: 2,
+       status: "D",
+       favorites: { artist: "Noguchi", food: "nougat" },
+       finished: [ 14, 6 ],
+       badges: [ "orange" ],
+       points: [
+          { points: 71, bonus: 20 }
+       ]
+     },
+     {
+       _id: 6,
+       name: "abc",
+       age: 43,
+       type: 1,
+       status: "A",
+       favorites: { food: "pizza", artist: "Picasso" },
+       finished: [ 18, 12 ],
+       badges: [ "black", "blue" ],
+       points: [
+          { points: 78, bonus: 8 },
+          { points: 57, bonus: 7 }
+       ]
+     }
+  ]
+)
+7.View all the documents with name and age fields in the users collection where age is not equal to 30:
+The find method is used to perform queries in MongoDB. Querying returns a subset of documents in a collection, from no documents at all to the entire collection. Which documents get returned is determined by the first argument to find, which is a document specifying the query criteria.
+An empty query document (i.e., {}) matches everything in the collection. If find isn’t given a query document, it defaults to {}. For example, the following:
+> db.c.find()
+matches every document in the collection c (and returns these documents in batches).
+When we start adding key/value pairs to the query document, we begin restricting our search. This works in a straightforward way for most types: numbers match numbers, booleans match booleans, and strings match strings. Querying for a simple type is as easy as specifying the value that you are looking for. For example, to find all documents where the value for "age" is 27, we can add that key/value pair to the query document:
+> db.users.find({"age" : 27})
+8.View all the documents with name and age fields in the users collection where age is in 30, 35, 40:
+
+9. View all the documents with name and age fields in the users collection where age is not in 30, 35, 40:
+
+10.View all the documents with name and age fields in the users collection where age is equal to 30:
+
+Output:
+
+11. View all the documents with name and age fields in the users collection where age is equal to 30 or 35:
+db.people.find({ age: { $gt: 25, $lte: 50 } }) Age greater than 25 and less than or equal to 50 Returns all documents having age > 25 and age <= 50 db.people.find({$or:[{status: "A"},{age: 55}]}) Status = “A” or age = 55 Returns all documents having status=“A” or age=55 db.people.find({ status: {$in:["A", "B"]}}) Status = “A” or status = B Returns all documents where the status field value is either
+12.View all the documents with name and age fields in the users collection where age is equal to 30 and 35:
+$elemMatchArray element matching{"contact":{"$elemMatch":{"name":"Anderson", age:35}}}$distinctArray with unique element values{"$distinct": "name"}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
